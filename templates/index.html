@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <title>Stock Analyzer</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="hero">
+
+        <h1>Stock Analyzer</h1>
+
+        <p>
+            Analyze businesses using financial metrics and valuation models.
+        </p>
+
+    </div>
+
+    <div class="form-card">
+
+        <form method="POST" action="/analyze">
+
+            <div class="form-group">
+
+                <label for="symbol">
+                    Stock Symbol
+                </label>
+
+                <input
+                    type="text"
+                    id="symbol"
+                    name="symbol"
+                    placeholder="e.g. TCS"
+                    required
+                >
+
+            </div>
+
+            <h2 class="section-title">
+                Valuation Assumptions
+            </h2>
+
+            <div class="assumptions">
+
+                <div class="form-group">
+
+                    <label for="growth">
+                        Fair Growth Rate (%)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="growth"
+                        name="growth"
+                        value="10"
+                        step="0.1"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="fair_pe">
+                        Fair P/E
+                    </label>
+
+                    <input
+                        type="number"
+                        id="fair_pe"
+                        name="fair_pe"
+                        value="20"
+                        step="0.1"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="fair_pb">
+                        Fair P/B
+                    </label>
+
+                    <input
+                        type="number"
+                        id="fair_pb"
+                        name="fair_pb"
+                        value="2"
+                        step="0.1"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="dcf_growth">
+                        DCF Growth Rate (%)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="dcf_growth"
+                        name="dcf_growth"
+                        value="10"
+                        step="0.1"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="discount_rate">
+                        Discount Rate (%)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="discount_rate"
+                        name="discount_rate"
+                        value="10"
+                        step="0.1"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="terminal_growth">
+                        Terminal Growth (%)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="terminal_growth"
+                        name="terminal_growth"
+                        value="4"
+                        step="0.1"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="forecast_years">
+                        Forecast Years
+                    </label>
+
+                    <input
+                        type="number"
+                        id="forecast_years"
+                        name="forecast_years"
+                        value="5"
+                        min="1"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+            <button type="submit">
+                Analyze Stock
+            </button>
+
+            <p class="hint">
+                Valuation assumptions can be adjusted before each analysis.
+            </p>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

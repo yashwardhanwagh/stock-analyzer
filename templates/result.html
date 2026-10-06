@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <title>{{ stock["name"] }} — Stock Analysis</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- STOCK HEADER -->
+
+    <div class="stock-header">
+
+        <h1>{{ stock["name"] }}</h1>
+
+        <p class="symbol">
+            {{ stock["symbol"] }}
+        </p>
+
+        <div class="stock-info">
+
+            <div class="info-box">
+                <div class="info-label">
+                    Current Price
+                </div>
+
+                <div class="info-value price">
+                    ₹{{ "%.2f"|format(stock["price"]) }}
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-label">
+                    Sector
+                </div>
+
+                <div class="info-value">
+                    {{ stock["sector"] }}
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-label">
+                    Industry
+                </div>
+
+                <div class="info-value">
+                    {{ stock["industry"] }}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- BUSINESS QUALITY -->
+
+    <div class="section">
+
+        <h2 class="section-title">
+            Business Quality
+        </h2>
+
+        <div class="metrics-grid">
+
+            {% if "ROE" in industry_metrics %}
+
+            <div class="metric-card">
+
+                <div class="metric-name">
+                    ROE
+                </div>
+
+                {% if stock["roe"] is not none %}
+
+                    <div class="metric-value">
+                        {{ "%.2f"|format(stock["roe"]) }}%
+                    </div>
+
+                    <div class="metric-analysis {{ analysis['roe']|lower|replace(' ', '-') }}">
+                        {{ analysis["roe"] }}
+                    </div>
+
+                {% else %}
+
+                    <div class="metric-value">
+                        N/A
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+            {% endif %}
+
+
+            {% if "ROCE" in industry_metrics %}
+
+            <div class="metric-card">
+
+                <div class="metric-name">
+                    ROCE
+                </div>
+
+                {% if stock["roce"] is not none %}
+
+                    <div class="metric-value">
+                        {{ "%.2f"|format(stock["roce"]) }}%
+                    </div>
+
+                    <div class="metric-analysis {{ analysis['roce']|lower|replace(' ', '-') }}">
+                        {{ analysis["roce"] }}
+                    </div>
+
+                {% else %}
+
+                    <div class="metric-value">
+                        N/A
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+            {% endif %}
+
+
+            {% if "Revenue Growth" in industry_metrics %}
+
+            <div class="metric-card">
+
+                <div class="metric-name">
+                    Revenue Growth
+                </div>
+
+                {% if stock["revenue_growth_yoy"] is not none %}
+
+                    <div class="metric-value">
+                        {{ "%.2f"|format(stock["revenue_growth_yoy"]) }}%
+                    </div>
+
+                    <div class="metric-analysis {{ analysis['revenue_growth']|lower|replace(' ', '-') }}">
+                        {{ analysis["revenue_growth"] }}
+                    </div>
+
+                {% else %}
+
+                    <div class="metric-value">
+                        N/A
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+            {% endif %}
+
+
+            {% if "EPS Growth" in industry_metrics %}
+
+            <div class="metric-card">
+
+                <div class="metric-name">
+                    EPS Growth
+                </div>
+
+                {% if stock["eps_growth_yoy"] is not none %}
+
+                    <div class="metric-value">
+                        {{ "%.2f"|format(stock["eps_growth_yoy"]) }}%
+                    </div>
+
+                    <div class="metric-analysis {{ analysis['eps_growth']|lower|replace(' ', '-') }}">
+                        {{ analysis["eps_growth"] }}
+                    </div>
+
+                {% else %}
+
+                    <div class="metric-value">
+                        N/A
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+            {% endif %}
+
+
+            {% if "Debt" in industry_metrics %}
+
+            <div class="metric-card">
+
+                <div class="metric-name">
+                    Debt to Equity
+                </div>
+
+                {% if stock["debt_to_equity"] is not none %}
+
+                    <div class="metric-value">
+                        {{ stock["debt_to_equity"] }}
+                    </div>
+
+                    <div class="metric-analysis {{ analysis['debt']|lower|replace(' ', '-') }}">
+                        {{ analysis["debt"] }}
+                    </div>
+
+                {% else %}
+
+                    <div class="metric-value">
+                        N/A
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+            {% endif %}
+
+
+            {% if "PE" in industry_metrics %}
+
+            <div class="metric-card">
+
+                <div class="metric-name">
+                    P/E Ratio
+                </div>
+
+                {% if stock["pe_ratio"] is not none %}
+
+                    <div class="metric-value">
+                        {{ "%.2f"|format(stock["pe_ratio"]) }}
+                    </div>
+
+                    <div class="metric-analysis {{ analysis['pe']|lower|replace(' ', '-') }}">
+                        {{ analysis["pe"] }}
+                    </div>
+
+                {% else %}
+
+                    <div class="metric-value">
+                        N/A
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+            {% endif %}
+
+
+            {% if "P/B" in industry_metrics %}
+
+            <div class="metric-card">
+
+                <div class="metric-name">
+                    P/B Ratio
+                </div>
+
+                {% if stock["pb_ratio"] is not none %}
+
+                    <div class="metric-value">
+                        {{ "%.2f"|format(stock["pb_ratio"]) }}
+                    </div>
+
+                    <div class="metric-analysis {{ analysis['pb']|lower|replace(' ', '-') }}">
+                        {{ analysis["pb"] }}
+                    </div>
+
+                {% else %}
+
+                    <div class="metric-value">
+                        N/A
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- VALUATION -->
+
+    <div class="section">
+
+        <h2 class="section-title">
+            Valuation
+        </h2>
+
+        <div class="valuation-visual">
+
+            <div class="valuation-scale">
+                <span>Current Price</span>
+
+                <span>
+                    ₹{{ "%.2f"|format(stock["price"]) }}
+                </span>
+            </div>
+
+
+            {% if "Graham" in models and "Graham" in valuations %}
+
+            <div class="valuation-row">
+
+                <div class="valuation-row-header">
+                    <span>Graham</span>
+
+                    <span>
+                        ₹{{ "%.2f"|format(valuations["Graham"]) }}
+                    </span>
+                </div>
+
+                <div class="valuation-bar">
+
+                    <div
+                        class="valuation-fill"
+                        style="width: {{ (valuations['Graham'] / stock['price'] * 100)|round(1) }}%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            {% if "PE" in models and "PE" in valuations %}
+
+            <div class="valuation-row">
+
+                <div class="valuation-row-header">
+                    <span>P/E</span>
+
+                    <span>
+                        ₹{{ "%.2f"|format(valuations["PE"]) }}
+                    </span>
+                </div>
+
+                <div class="valuation-bar">
+
+                    <div
+                        class="valuation-fill"
+                        style="width: {{ (valuations['PE'] / stock['price'] * 100)|round(1) }}%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            {% if "P/B" in models and "P/B" in valuations %}
+
+            <div class="valuation-row">
+
+                <div class="valuation-row-header">
+                    <span>P/B</span>
+
+                    <span>
+                        ₹{{ "%.2f"|format(valuations["P/B"]) }}
+                    </span>
+                </div>
+
+                <div class="valuation-bar">
+
+                    <div
+                        class="valuation-fill"
+                        style="width: {{ (valuations['P/B'] / stock['price'] * 100)|round(1) }}%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            {% if "DCF" in models and "DCF" in valuations %}
+
+            <div class="valuation-row">
+
+                <div class="valuation-row-header">
+                    <span>DCF</span>
+
+                    <span>
+                        ₹{{ "%.2f"|format(valuations["DCF"]) }}
+                    </span>
+                </div>
+
+                <div class="valuation-bar">
+
+                    <div
+                        class="valuation-fill"
+                        style="width: {{ (valuations['DCF'] / stock['price'] * 100)|round(1) }}%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+
+    <div class="section">
+
+        <h2 class="section-title">
+            Valuation Summary
+        </h2>
+
+        <div class="summary-grid">
+
+            <div class="summary-card">
+
+                <div class="summary-label">
+                    Average Valuation
+                </div>
+
+                <div class="summary-value">
+                    ₹{{ "%.2f"|format(valuations["Average"]) }}
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-label">
+                    Margin of Safety
+                </div>
+
+                <div class="summary-value">
+                    {{ "%.2f"|format(valuations["Margin of Safety"]) }}%
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-label">
+                    Valuation Spread
+                </div>
+
+                <div class="summary-value">
+                    {{ "%.2f"|format(valuations["Valuation Spread"]) }}%
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
