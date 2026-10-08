@@ -4,6 +4,11 @@ Stock Analyzer is a Python and Flask application that helps users evaluate publi
 
 The application combines company fundamentals, industry-specific analysis, and valuation assumptions to estimate a stock's fair value and compare it with its current market price.
 
+## Live Demo
+Try the deployed application:
+https://stock-analyzer-vbv7.onrender.com
+
+
 ## What It Does
 
 The user enters an Indian stock ticker, along with valuation assumptions such as expected growth rate, discount rate, terminal growth rate, and forecast period.
